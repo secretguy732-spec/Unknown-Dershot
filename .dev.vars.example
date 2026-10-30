@@ -1,0 +1,9 @@
+# Salin ke .dev.vars (file ini di-gitignore). Isi lewat: npm run secrets
+ANSWER_PEPPER=
+SESSION_SECRET=
+DATA_KEY=
+# Epoch lokal. Untuk melihat episode 1 aktif saat development, pakai DEV_FAKE_NOW.
+EPOCH_UTC=2026-11-02T00:00:00Z
+COOKIE_SECURE=false
+# Opsional (hanya dev-server Node): majukan jam server palsu, mis. episode 7 aktif.
+# DEV_FAKE_NOW=2026-11-14T12:00:00Z

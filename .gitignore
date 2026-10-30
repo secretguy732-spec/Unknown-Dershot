@@ -1,0 +1,9 @@
+node_modules/
+.dev.vars
+.env
+.dev/
+build/
+.wrangler/
+# BERISI JAWABAN & SELURUH CERITA — JANGAN PERNAH DI-COMMIT KE REPO PUBLIK
+private/
+*.map

@@ -1,0 +1,37 @@
+name = "unknown-dershot"
+main = "src/worker.js"
+compatibility_date = "2025-09-01"
+
+# Satu Worker melayani API + halaman HTML; file statis (js/css/svg) dilayani langsung oleh Assets
+# (permintaan aset statis gratis & tak terbatas, dan TIDAK menghabiskan kuota 100.000 request/hari).
+# Origin yang sama -> cookie HttpOnly/SameSite=Strict bekerja tanpa CORS.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+html_handling = "none"
+not_found_handling = "404-page"
+run_worker_first = ["/api/*", "/", "/archive", "/about", "/privacy", "/admin", "/episode/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dershot"
+database_id = "GANTI_DENGAN_DATABASE_ID_D1_KAMU"
+migrations_dir = "migrations"
+
+# Cron hanya untuk housekeeping (hapus data rate-limit lama).
+# Rotasi 48 jam TIDAK bergantung pada cron: dihitung dari jam server + epoch.
+[triggers]
+crons = ["17 3 * * *"]
+
+[vars]
+# Awal jadwal (UTC, TETAP). Episode N aktif di [EPOCH + (N-1)*48j, EPOCH + N*48j).
+# Jangan diubah setelah publik, kecuali kamu memang ingin menggeser seluruh jadwal.
+EPOCH_UTC = "2026-11-02T00:00:00Z"
+COOKIE_SECURE = "true"
+HINT1_AFTER_HOURS = "12"
+HINT2_AFTER_HOURS = "30"
+RL_FREE_ATTEMPTS = "5"
+RL_GLOBAL_PER_HOUR = "600"
+
+# Secret (JANGAN taruh di sini) — set dengan: wrangler secret put <NAMA>
+#   ANSWER_PEPPER, SESSION_SECRET, DATA_KEY

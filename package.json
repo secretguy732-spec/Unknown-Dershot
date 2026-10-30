@@ -1,0 +1,22 @@
+{
+  "name": "unknown-dershot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Unknown-Dershot — interactive mystery website. Every 48 hours, the truth changes.",
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "test": "node --test --no-warnings \"tests/*.test.js\"",
+    "dev": "node --no-warnings scripts/dev-server.mjs",
+    "secrets": "node scripts/gen-secrets.mjs",
+    "seed:build": "node --no-warnings scripts/build-seed.mjs",
+    "admin:sql": "node --no-warnings scripts/create-admin.mjs",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply dershot --local",
+    "db:migrate:remote": "wrangler d1 migrations apply dershot --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
